@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -49,10 +49,6 @@
 
 
 
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -91,9 +87,9 @@
     scheme: 'Muse',
     version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    fastclick: ,
-    lazyload: ,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
@@ -119,7 +115,7 @@
 <meta property="og:url" content="https://knighthartx.github.io/2017/10/03/whentheycry/index.html">
 <meta property="og:site_name" content="简明现代魔法">
 <meta property="og:description" content="想念那一个个消逝的夏天，想念那耀眼的阳光、温暖的风，以及…那一次次清脆悠曳的蝉鸣。或多或少的牵挂，或悲或喜的命运，好似树上形状各异的叶；有些色泽鲜艳，有些枯黄暗淡，但却有着一样的经络分明，在树上缀满，在风中摇曳。叶的间隙，掩不住阳光，盖不过蝉鸣，更藏不住一次次熟悉的故事，熟悉的人、朋友…你所能看到的，只是虚伪的居所在那能看到的，只是空虚的眼神我所能看到的，只是重演的悲剧 。在这寒蝉鸣泣之时，你，">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-10-3/11697009.jpg">
 <meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-10-3/98876343.jpg">
 <meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-10-3/17559560.jpg">
@@ -188,7 +184,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -214,7 +210,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -233,14 +229,24 @@
         
           
           <li class="menu-item menu-item-home">
-    <a href="/" rel="section">Startseite</a>
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
   </li>
         
         
         
           
           <li class="menu-item menu-item-archives">
-    <a href="/archives/" rel="section">Archiv</a>
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
 
       
@@ -249,7 +255,8 @@
           
             <a href="javascript:;" class="popup-trigger">
           
-            Suche</a>
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
         </li>
       
     </ul>
@@ -273,7 +280,7 @@
     </span>
     <div class="local-search-input-wrapper">
       <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
+             placeholder="搜索..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
   </div>
@@ -356,16 +363,32 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
               
 
-              <time title="Post created: 2017-10-03 23:35:47" itemprop="dateCreated datePublished" datetime="2017-10-03T23:35:47+08:00">2017-10-03</time>
+              <time title="创建时间：2017-10-03 23:35:47" itemprop="dateCreated datePublished" datetime="2017-10-03T23:35:47+08:00">2017-10-03</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2017-12-22 20:19:27" itemprop="dateModified" datetime="2017-12-22T20:19:27+08:00">2017-12-22</time>
+              
             
           </span>
 
@@ -547,6 +570,66 @@
           </div>
 
           
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
 
           
 
@@ -582,7 +665,7 @@
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate">
-    <i class="fa fa-"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">KnightHart</span>
 
@@ -594,11 +677,15 @@
 
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
+  <span class="post-meta-divider">|</span>
 
-  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.1</div>
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.1</div>
 
 
 
@@ -649,8 +736,6 @@
 
 
 
-  
-
 
 
 
@@ -678,11 +763,6 @@
   
   
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
 
@@ -1080,6 +1160,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

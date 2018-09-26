@@ -1539,9 +1539,6 @@ pre .javascript .function {
   border-bottom: 1px dashed #999;
   cursor: help;
 }
-.post-symbolscount {
-  display: inline-block;
-}
 .post-meta-divider {
   margin: 0 0.5em;
 }
@@ -1851,7 +1848,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #53b5ff;
+  background: #33c22d;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -1980,13 +1977,10 @@ pre .javascript .function {
 .footer-inner {
   text-align: center;
 }
-#animate {
-  animation: iconAnimate 1.33s ease-in-out infinite;
-}
 .with-love {
   display: inline-block;
   margin: 0 5px;
-  color: user;
+  color: #808080;
 }
 .powered-by,
 .theme-info {
@@ -2249,13 +2243,6 @@ pre .javascript .function {
 .site-pv .busuanzi-value,
 .page-pv .busuanzi-value {
   margin: 0 5px;
-}
-.site-uv {
-  margin-right: 10px;
-}
-.site-uv::after {
-  content: "|";
-  padding-left: 10px;
 }
 .page-archive .archive-page-counter {
   position: relative;
