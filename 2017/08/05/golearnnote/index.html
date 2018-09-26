@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: ,
+    lazyload: ,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Go语言基础Go语言简介Go是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。为了方便搜索和识别，有时会将其称为Golang。罗伯特·格瑞史莫，罗勃·派克（Rob Pike）及肯·汤普逊于2007年9月开始设计Go语言，稍后Ian Lance Taylor、Russ Cox加入专案。Go语言是基于Inferno作业系统所开发的。Go语言于2009年11月正式宣布推出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言学习笔记">
+<meta property="og:url" content="https://knighthartx.github.io/2017/08/05/golearnnote/index.html">
+<meta property="og:site_name" content="简明现代魔法">
+<meta property="og:description" content="Go语言基础Go语言简介Go是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。为了方便搜索和识别，有时会将其称为Golang。罗伯特·格瑞史莫，罗勃·派克（Rob Pike）及肯·汤普逊于2007年9月开始设计Go语言，稍后Ian Lance Taylor、Russ Cox加入专案。Go语言是基于Inferno作业系统所开发的。Go语言于2009年11月正式宣布推出">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-22/85571792.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-22/90101005.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-22/48077561.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-22/24085232.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-22/9977048.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-22/4247672.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-23/13939951.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-23/2857398.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-23/78208166.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-23/30729498.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-23/28770000.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-23/24510164.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-23/93209796.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-23/1255769.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-23/78275968.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-24/20573835.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-24/67514913.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-24/84379616.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-24/50783758.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-24/56275469.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-24/53038620.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-24/99085590.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-25/18237426.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-25/75161598.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-25/32563292.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/27428608.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/97316280.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/50564423.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/50564423.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/79998804.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/39565201.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/21588824.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/73739209.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/76358011.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/11558708.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/2670722.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/32293184.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/40659156.jpg">
+<meta property="og:image" content="http://omt37wai0.bkt.clouddn.com/17-7-26/66703020.jpg">
+<meta property="og:updated_time" content="2017-12-22T12:19:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go语言学习笔记">
+<meta name="twitter:description" content="Go语言基础Go语言简介Go是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。为了方便搜索和识别，有时会将其称为Golang。罗伯特·格瑞史莫，罗勃·派克（Rob Pike）及肯·汤普逊于2007年9月开始设计Go语言，稍后Ian Lance Taylor、Russ Cox加入专案。Go语言是基于Inferno作业系统所开发的。Go语言于2009年11月正式宣布推出">
+<meta name="twitter:image" content="http://omt37wai0.bkt.clouddn.com/17-7-22/85571792.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://knighthartx.github.io/2017/08/05/golearnnote/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Go语言学习笔记 | 简明现代魔法</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">简明现代魔法</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">Archiv</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://knighthartx.github.io/2017/08/05/golearnnote/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KnightHart">
+      <meta itemprop="description" content="一个简单的个人博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="简明现代魔法">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go语言学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2017-08-05 17:08:43" itemprop="dateCreated datePublished" datetime="2017-08-05T17:08:43+08:00">2017-08-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/05/golearnnote/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/05/golearnnote/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Go语言基础"><a href="#Go语言基础" class="headerlink" title="Go语言基础"></a>Go语言基础</h2><h3 id="Go语言简介"><a href="#Go语言简介" class="headerlink" title="Go语言简介"></a>Go语言简介</h3><p>Go是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。为了方便搜索和识别，有时会将其称为Golang。<br>罗伯特·格瑞史莫，罗勃·派克（Rob Pike）及肯·汤普逊于2007年9月开始设计Go语言，稍后Ian Lance Taylor、Russ Cox加入专案。Go语言是基于Inferno作业系统所开发的。Go语言于2009年11月正式宣布推出，成为开放原始码专案，并在Linux及Mac OS X平台上进行了实现，后来追加了Windows系统下的实现。<br>目前Go语言每半年发布一个二级版本（即升级1.x到1.y）<br>Go语言的语法接近C语言，但对于变量的声明有所不同。Go语言支持垃圾回收功能。Go语言的并行模型是以东尼·霍尔的交谈循序程式（CSP）为基础，采取类似模型的其他语言包括Occam和Limbo，但它也具有Pi运算的特征，比如通道传输。在1.8版本中开放插件（Plugin）的支持，这意味著现在能从Go语言中动态载入部分函式。<br>与C++相比，Go语言并不包括如异常处理、继承、泛型、断言、虚函数等功能，但增加了 Slice 型、并发、管道、垃圾回收、接口（Interface）等特性的语言级支持。Google 目前仍正在讨论是否应该支持泛型，其态度还是很开放的，但在该语言的常见问题列表中，对于断言的存在，则持负面态度，同时也为自己不提供型别继承来辩护。<br>不同于Java，Go语言内嵌了关联数组（也称为哈希表（Hashes）或字典（Dictionaries）），就像字符串类型一样。</p>
+<h3 id="文件名、关键字与标识符"><a href="#文件名、关键字与标识符" class="headerlink" title="文件名、关键字与标识符"></a>文件名、关键字与标识符</h3><h4 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h4><p>Go 的源文件以 .go 为后缀名存储在计算机中，这些文件名均由小写字母组成，如 helloworld.go 。如果文件名由多个部分组成，则使用下划线 _ 对它们进行分隔，如 hello_world.go 。文件名不包含空格或其他特殊字符。</p>
+<h4 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h4><p>Go语言中25个关键字或保留字<br><img src="http://omt37wai0.bkt.clouddn.com/17-7-22/85571792.jpg" alt=""></p>
+<h3 id="预定义标识符"><a href="#预定义标识符" class="headerlink" title="预定义标识符"></a>预定义标识符</h3><p>除了以上介绍的这些关键字，Go 语言还有 36 个预定义标识符，其中包含了基本类型的名称和一些基本的内置函数<br><img src="http://omt37wai0.bkt.clouddn.com/17-7-22/90101005.jpg" alt=""></p>
+<h3 id="Helloworld"><a href="#Helloworld" class="headerlink" title="Helloworld"></a>Helloworld</h3><p>以一个helloworld开始<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello, 世界"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-22/48077561.jpg" alt=""></p>
+<p>Go语言支持Unicode，因此能处理所有语言，包括中文。<br>Go语言的代码通过包（package）组织，包类似于其它语言里的库（libraries）或者模块（modules）。一个包由位于单个目录下的一个或多个.go源代码文件组成, 目录定义包的作用。每个源文件都以一条package声明语句开始，这个例子里就是package main, 表示该文件属于哪个包，紧跟着一系列导入（import）的包，之后是存储在这个文件里的程序语句。<br>Go的标准库提供了100多个包，以支持常见功能，如输入、输出、排序以及文本处理。比如fmt包，就含有格式化输出、接收输入的函数。Println是其中一个基础函数，可以打印以空格间隔的一个或多个值，并在最后添加一个换行符，从而输出一整行。<br>main包比较特殊。它定义了一个独立可执行的程序，而不是一个库。在main里的main 函数 也很特殊，它是整个程序执行时的入口7。main函数所做的事情就是程序做的。当然了，main函数一般调用其它包里的函数完成很多工作, 比如fmt.Println。<br>必须告诉编译器源文件需要哪些包，这就是import声明以及随后的package声明扮演的角色。hello world例子只用到了一个包，大多数程序需要导入多个包。<br>必须恰当导入需要的包，缺少了必要的包或者导入了不需要的包，程序都无法编译通过。这项严格要求避免了程序开发过程中引入未使用的包。</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>Go语言主要有四种类型的声明语句：<strong>var</strong>、<strong>const</strong>、<strong>type</strong>和<strong>func</strong>，分别对应变量、常量、类型和函数实体对象的声明。</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>var声明语句可以创建一个特定类型的变量，然后给变量附加一个名字，并且设置变量的初始值。变量声明的一般语法如下：</p>
+<blockquote>
+<p>var 变量名字 类型 = 表达式</p>
+</blockquote>
+<p>其中“类型”或“= 表达式”两个部分可以省略其中的一个。<br>如果省略的是类型信息，那么将根据初始化表达式来推导变量的类型信息。<br>如果初始化表达式被省略，那么将用零值初始化该变量。<br>数值类型变量对应的零值是0，布尔类型变量对应的零值是false，字符串类型对应的零值是空字符串，接口或引用类型（包括slice、map、chan和函数）变量对应的零值是nil。数组或结构体等聚合类型对应的零值是每个元素或字段都是对应该类型的零值。<br>因此，Go语言中不存在未初始化的量，避免了C语言中诸如“野码”的存在。<br>也可以在一个声明语句中同时声明一组变量，或用一组初始化表达式声明并初始化一组变量。如果省略每个变量的类型，将可以声明多个类型不同的变量（类型由初始化表达式推导）：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> a, b, c <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">var</span> d, e, f=<span class="number">6</span>, <span class="number">7.1</span>, <span class="string">"ff"</span></span><br><span class="line">	fmt.Println(a,b,c,d,e,f)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-22/24085232.jpg" alt=""></p>
+<h4 id="简短变量声明"><a href="#简短变量声明" class="headerlink" title="简短变量声明"></a>简短变量声明</h4><p>在Go语言中，有一种称为简短变量声明语句的形式可用于声明和初始化局部变量。它以“名字 := 表达式”形式声明变量，变量的类型根据表达式来自动推导。<br>例如：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	a:=<span class="string">"AAAA"</span></span><br><span class="line">	b:=<span class="number">6</span></span><br><span class="line">	c:=<span class="number">7.000000001</span></span><br><span class="line">	fmt.Println(a,b,c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-2"><a href="#运行结果-2" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-22/9977048.jpg" alt=""></p>
+<p>请记住“:=”是一个变量声明语句，而“=‘是一个变量赋值操作。</p>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>使用赋值语句可以更新一个变量的值，最简单的赋值语句是将要被赋值的变量放在=的左边，新值的表达式放在=的右边。<br>也可使用类似于a++的方式进行赋值，例如：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	a:=<span class="number">1</span></span><br><span class="line">	a=<span class="number">100</span></span><br><span class="line">	fmt.Println(a)</span><br><span class="line">	a++</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-3"><a href="#运行结果-3" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-22/4247672.jpg" alt=""></p>
+<h4 id="元祖赋值"><a href="#元祖赋值" class="headerlink" title="元祖赋值"></a>元祖赋值</h4><p>元组赋值是另一种形式的赋值语句，它允许同时更新多个变量的值。在赋值之前，赋值语句右边的所有表达式将会先进行求值，然后再统一更新左边对应变量的值。<br>例如，利用元祖赋值计算两整数的最大公约数：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">gcd</span><span class="params">(x, y <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> y != <span class="number">0</span> &#123;</span><br><span class="line">		x, y = y, x%y</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> x,y <span class="keyword">int</span></span><br><span class="line">	fmt.Println(<span class="string">"请输入两个整数"</span>)</span><br><span class="line">	fmt.Scanln(&amp;x,&amp;y)</span><br><span class="line">	fmt.Printf(<span class="string">"%v和%v的最大公约数为%v"</span>,x,y,gcd(x,y))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-4"><a href="#运行结果-4" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-23/13939951.jpg" alt=""></p>
+<h3 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a>基础数据类型</h3><p>Go语言将数据类型分为四类：基础类型、复合类型、引用类型和接口类型。</p>
+<h4 id="整形"><a href="#整形" class="headerlink" title="整形"></a>整形</h4><p>Go语言有int8、int16、int32和int64四种截然不同大小的有符号整形数类型，分别对应8、16、32、64bit大小的有符号整形数，与此对应的是uint8、uint16、uint32和uint64四种无符号整形数类型。</p>
+<p>Unicode字符rune类型是和int32等价的类型，通常用于表示一个Unicode码点。这两个名称可以互换使用。同样byte也是uint8类型的等价类型，byte类型一般用于强调数值是一个原始的数据而不是一个小的整数。</p>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><p>Go语言提供了两种精度的浮点数，float32和float64。它们的算术规范由IEEE754浮点数国际标准定义，该浮点数规范被所有现代的CPU支持。</p>
+<p>常量math.MaxFloat32表示float32能表示的最大数值，大约是 3.4e38；对应的math.MaxFloat64常量大约是1.8e308。它们分别能表示的最小值近似为1.4e-45和4.9e-324。</p>
+<p>一个float32类型的浮点数可以提供大约6个十进制数的精度，而float64则可以提供约15个十进制数的精度；通常应该优先使用float64类型，因为float32类型的累计计算误差很容易扩散，并且float32能精确表示的正整数并不是很大，因为float32的有效bit位只有23个，其它的bit位用于指数和符号；当整数大于23bit能表达的范围时，float32的表示将出现误差。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"math"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	fmt.Println(math.MaxFloat32)</span><br><span class="line">	fmt.Println(math.MaxFloat64)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-5"><a href="#运行结果-5" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-23/2857398.jpg" alt=""></p>
+<h4 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h4><p>Go语言提供了两种精度的复数类型：complex64和complex128，分别对应float32和float64两种浮点数精度。内置的complex函数用于构建复数，内建的real和imag函数分别返回复数的实部和虚部，如下例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> a <span class="keyword">complex128</span>=<span class="built_in">complex</span>(<span class="number">145</span>,<span class="number">64</span>)</span><br><span class="line">	<span class="keyword">var</span> b <span class="keyword">complex128</span>=<span class="built_in">complex</span>(<span class="number">12</span>,<span class="number">7</span>)</span><br><span class="line">	fmt.Println(a,b,<span class="built_in">real</span>(a),<span class="built_in">real</span>(b),<span class="built_in">imag</span>(a),<span class="built_in">imag</span>(b))</span><br><span class="line">	fmt.Println(a*b,<span class="built_in">real</span>(a*b),<span class="built_in">imag</span>(a*b))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果</p>
+<p><img src="http://omt37wai0.bkt.clouddn.com/17-7-23/78208166.jpg" alt=""></p>
+<h4 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h4><p>一个布尔类型的值只有两种：true和false。if和for语句的条件部分都是布尔类型的值，并且==和&lt;等比较操作也会产生布尔型的值。一元操作符!对应逻辑非操作，因此!true的值为false。</p>
+<p>布尔值可以和&amp;&amp;（AND）和||（OR）操作符结合</p>
+<p>布尔值并不会隐式转换为数字值0或1，反之亦然。必须使用一个显式的if语句辅助转换。通常使用一个转换函数。</p>
+<p>示例代码如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> a <span class="keyword">bool</span>=<span class="literal">true</span></span><br><span class="line">	<span class="keyword">var</span> b <span class="keyword">bool</span>=<span class="literal">false</span></span><br><span class="line">	c:=a||b</span><br><span class="line">	d:=a&amp;&amp;b</span><br><span class="line">	fmt.Println(a,b,c,d,convert(c),convert(d))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">convert</span><span class="params">(a <span class="keyword">bool</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> i <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">if</span> a&#123;</span><br><span class="line">		i=<span class="number">1</span></span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		i=<span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-6"><a href="#运行结果-6" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-23/30729498.jpg" alt=""></p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>一个字符串是一个不可改变的字节序列，文本字符串通常被解释为采用UTF8编码的Unicode码点（rune）序列。</p>
+<p>内置的len函数可以返回一个字符串中的字节数目，引操作s[i]返回第i个字节的字节值，i必须满足0 ≤ i&lt; len(s)条件约束。如果试图访问超出字符串索引范围的字节将会导致panic异常。</p>
+<p><strong>注意</strong>：第i个字节并不一定是字符串的第i个字符，因为对于非ASCII字符的UTF8编码会要两个或多个字节。</p>
+<p>子字符串操作s[i:j]基于原始的s字符串的第i个字节开始到第j个字节（并不包含j本身）生成一个新字符串。生成的新字符串将包含j-i个字节。同样，如果索引超出字符串范围或者j小于i的话将导致panic异常。不管i还是j都可能被忽略，当它们被忽略时将采用0作为开始位置，采用len(s)作为结束的位置。</p>
+<p>+操作符将两个字符串链接构造一个新字符串，==和&lt;进行比较；比较通过逐个字节比较完成的，因此比较的结果是字符串自然编码的顺序。</p>
+<p>字符串的值是不可变的：一个字符串包含的字节序列永远不会被改变，当然我们也可以给一个字符串变量分配一个新字符串值，但这并不会导致原始的字符串值被改变，因为字符串是不可修改的，因此尝试修改字符串内部数据的操作也是被禁止的。</p>
+<p>示例代码如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> s <span class="keyword">string</span>=<span class="string">"helloworld"</span></span><br><span class="line">	fmt.Println(s)</span><br><span class="line">	lenth:=<span class="built_in">len</span>(s)</span><br><span class="line">	fmt.Println(lenth)</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(s[<span class="number">1</span>]))</span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="built_in">len</span>(s);i++ &#123;</span><br><span class="line">		fmt.Println(<span class="keyword">string</span>(s[i]))</span><br><span class="line">	&#125;</span><br><span class="line">	s1:=s[<span class="number">1</span>:<span class="number">7</span>]</span><br><span class="line">	s2:=s[<span class="number">0</span>:<span class="number">6</span>]</span><br><span class="line">	<span class="built_in">println</span>(s1+s2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-7"><a href="#运行结果-7" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-23/28770000.jpg" alt=""></p>
+<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><p>常量表达式的值在编译期计算，而不是在运行期。每种常量的潜在类型都是基础类型：boolean、string或数字。</p>
+<p>一个常量的声明语句定义了常量的名字，和变量的声明语法类似，常量的值不可修改，这样可以防止在运行期被意外或恶意的修改。例如，常量比变量更适合用于表达像π之类的数学常数，因为它们的值不会发生变化。</p>
+<p>例子：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">const</span> (</span><br><span class="line">		Pi  =<span class="number">3.1415926</span></span><br><span class="line">		r=<span class="number">2</span></span><br><span class="line">	)</span><br><span class="line">	S:=Pi*r*r</span><br><span class="line">	fmt.Println(S)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-8"><a href="#运行结果-8" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-23/24510164.jpg" alt=""></p>
+<h3 id="Go语言循环"><a href="#Go语言循环" class="headerlink" title="Go语言循环"></a>Go语言循环</h3><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-23/93209796.jpg" alt=""></p>
+<p>Go语言提供了三种for循环方式：</p>
+<ul>
+<li>和 C 语言的 for 一样：</li>
+</ul>
+<blockquote>
+<p>for init; condition; post { }</p>
+</blockquote>
+<ul>
+<li><p>和 C 的 while 一样：</p>
+<blockquote>
+<p>for condition { }</p>
+</blockquote>
+</li>
+<li><p>和 C 的 for(;;) 一样：</p>
+<blockquote>
+<p>for { }</p>
+</blockquote>
+</li>
+</ul>
+<p>其中：</p>
+<ul>
+<li>init： 一般为赋值表达式，给控制变量赋初值；</li>
+<li>condition： 关系表达式或逻辑表达式，循环控制条件；</li>
+<li>post： 一般为赋值表达式，给控制变量增量或减量。</li>
+</ul>
+<p><img src="http://omt37wai0.bkt.clouddn.com/17-7-23/1255769.jpg" alt=""></p>
+<p>示例代码：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	S:=<span class="number">0</span></span><br><span class="line">	i:=<span class="number">0</span></span><br><span class="line">	n:=<span class="number">100</span></span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;=n ;i++  &#123;</span><br><span class="line">		S=S+i</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">println</span>(S)</span><br><span class="line">	i=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i&lt;=n&#123;</span><br><span class="line">		S=S+i</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(S)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-9"><a href="#运行结果-9" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-23/78275968.jpg" alt=""></p>
+<h3 id="Go语言条件语句"><a href="#Go语言条件语句" class="headerlink" title="Go语言条件语句"></a>Go语言条件语句</h3><p>条件语句需要开发者通过指定一个或多个条件，并通过测试条件是否为 true 来决定是否执行指定语句，并在条件为 false 的情况在执行另外的语句。</p>
+<p><img src="http://omt37wai0.bkt.clouddn.com/17-7-24/20573835.jpg" alt=""></p>
+<h4 id="if循环"><a href="#if循环" class="headerlink" title="if循环"></a>if循环</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-24/67514913.jpg" alt=""></p>
+<p>If 在布尔表达式为 true 时，其后紧跟的语句块执行，如果为 false 则执行 else 语句块。</p>
+<p>代码示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> a <span class="keyword">bool</span>=<span class="literal">true</span></span><br><span class="line">	<span class="keyword">var</span> b <span class="keyword">bool</span> = <span class="literal">false</span></span><br><span class="line">	<span class="keyword">if</span>  a&amp;&amp;b==<span class="literal">true</span>&#123;</span><br><span class="line">		fmt.Println(<span class="number">1</span>)</span><br><span class="line">	&#125;<span class="keyword">else</span>  &#123;</span><br><span class="line">		fmt.Println(<span class="number">0</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="运行结果-10"><a href="#运行结果-10" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-24/84379616.jpg" alt=""></p>
+<h4 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-24/50783758.jpg" alt=""></p>
+<p>switch 语句用于基于不同条件执行不同动作，每一个 case 分支都是唯一的，从上直下逐一测试，直到匹配为止。。<br>switch 语句执行的过程从上至下，直到找到匹配项，匹配项后面也<strong>不需要</strong>再加break。</p>
+<p>示例代码：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	fmt.Println(<span class="string">"请输入一个正整数n"</span>)</span><br><span class="line">	<span class="keyword">var</span> n <span class="keyword">int</span></span><br><span class="line">	fmt.Scanln(&amp;n)</span><br><span class="line">	m:=n%<span class="number">2</span></span><br><span class="line">	<span class="keyword">switch</span> m &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">0</span>:fmt.Printf(<span class="string">"%v为偶数\n"</span>,n)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>:fmt.Printf(<span class="string">"%v为奇数\n"</span>,n)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-11"><a href="#运行结果-11" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-24/56275469.jpg" alt=""></p>
+<h2 id="函数、切片、map"><a href="#函数、切片、map" class="headerlink" title="函数、切片、map"></a>函数、切片、map</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h4><p>函数声明包括函数名、形式参数列表、返回值列表（可省略）以及函数体。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">name</span><span class="params">(parameter-list)</span> <span class="params">(result-list)</span></span> &#123;</span><br><span class="line">    body</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>形式参数列表描述了函数的参数名以及参数类型。这些参数作为局部变量，其值由参数调用者提供。返回值列表描述了函数返回值的变量名以及类型。如果函数返回一个无名变量或者没有返回值，返回值列表的括号是可以省略的。如果一个函数声明不包括返回值列表，那么函数体执行完毕后，不会返回任何值。</p>
+<p>函数的类型被称为函数的标识符。如果两个函数形式参数列表和返回值列表中的变量类型一一对应，那么这两个函数被认为有相同的类型和标识符。形参和返回值的变量名不影响函数标识符也不影响它们是否可以以省略参数类型的形式表示。</p>
+<p>每一次函数调用都必须按照声明顺序为所有参数提供实参（参数值）。在函数调用时，Go语言没有默认参数值，也没有任何方法可以通过参数名指定形参，因此形参和返回值的变量名对于函数调用者而言没有意义。</p>
+<p>在函数体中，函数的形参作为局部变量，被初始化为调用者提供的值。函数的形参和有名返回值作为函数最外层的局部变量，被存储在相同的词法块中。</p>
+<p>示例代码如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sqare</span><span class="params">(a <span class="keyword">float64</span>)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">const</span> pi  =<span class="number">3.1415926</span></span><br><span class="line">	S:=pi*a*a</span><br><span class="line">	<span class="keyword">return</span> S</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> r <span class="keyword">float64</span></span><br><span class="line">	fmt.Println(<span class="string">"请输入半径r"</span>)</span><br><span class="line">	fmt.Scan(&amp;r)</span><br><span class="line">	fmt.Println(sqare(r))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-12"><a href="#运行结果-12" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-24/53038620.jpg" alt=""></p>
+<h4 id="多返回值"><a href="#多返回值" class="headerlink" title="多返回值"></a>多返回值</h4><p>在Go中，一个函数可以返回多个值。这可以用来确定函数是否得到了正确执行。<br>示例代码如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sqare</span><span class="params">(a <span class="keyword">float64</span>)</span> <span class="params">(S <span class="keyword">float64</span>,ok <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">const</span> pi  =<span class="number">3.1415926</span></span><br><span class="line">	S=pi*a*a</span><br><span class="line">	ok=<span class="literal">true</span></span><br><span class="line">	<span class="keyword">return</span> S,ok</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> r <span class="keyword">float64</span></span><br><span class="line">	fmt.Println(<span class="string">"请输入半径r"</span>)</span><br><span class="line">	fmt.Scan(&amp;r)</span><br><span class="line">	fmt.Println(sqare(r))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-13"><a href="#运行结果-13" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-24/99085590.jpg" alt=""></p>
+<h4 id="函数值"><a href="#函数值" class="headerlink" title="函数值"></a>函数值</h4><p>在Go中，函数被看作第一类值（first-class values）：函数像其他值一样，拥有类型，可以被赋值给其他变量，传递给函数，从函数返回。对函数值（function value）的调用类似函数调用。</p>
+<p>示例代码：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sqare</span><span class="params">(a <span class="keyword">float64</span>)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">const</span> pi  =<span class="number">3.1415926</span></span><br><span class="line">	S:=pi*a*a</span><br><span class="line">	<span class="keyword">return</span> S</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> r <span class="keyword">float64</span></span><br><span class="line">	fmt.Println(<span class="string">"请输入半径r"</span>)</span><br><span class="line">	fmt.Scan(&amp;r)</span><br><span class="line">	a:=sqare(r)</span><br><span class="line">	b:=sqare(sqare(r))</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">	fmt.Println(b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果："><a href="#运行结果：" class="headerlink" title="运行结果："></a>运行结果：</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-25/18237426.jpg" alt=""></p>
+<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><p>数组的长度不可改变，在特定场景中这样的集合不适用了，Go中提供了一种灵活，功能强悍的内置类型Slices切片,与数组相比切片的长度是不固定的，可以追加元素，在追加时可能使切片的容量增大。</p>
+<p>切片中有两个概念：一是len长度，二是cap容量，长度是指已经被赋过值的最大下标+1，可通过内置函数len()获得。</p>
+<p>容量是指切片目前可容纳的最多元素个数，可通过内置函数cap()获得。</p>
+<p>切片是引用类型，因此在当传递切片时将引用同一指针，修改值将会影响其他的对象。</p>
+<h4 id="切片的定义和初始化"><a href="#切片的定义和初始化" class="headerlink" title="切片的定义和初始化"></a>切片的定义和初始化</h4><p>声明一个未指定大小的数组来定义切片：</p>
+<blockquote>
+<p>var a []type </p>
+</blockquote>
+<p>切片不需要说明长度。<br>或使用make()函数来创建切片:</p>
+<blockquote>
+<p>a := make([]type, len)</p>
+</blockquote>
+<p>初始化切片：</p>
+<blockquote>
+<p>a :=[] int {1,2,3 }</p>
+</blockquote>
+<blockquote>
+<p>a1 := a[startIndex:endIndex] </p>
+</blockquote>
+<p>或使用make函数定义并初始化：</p>
+<blockquote>
+<p>s :=make([]int,len,cap) </p>
+</blockquote>
+<h4 id="len-和-cap-函数"><a href="#len-和-cap-函数" class="headerlink" title="len() 和 cap() 函数"></a>len() 和 cap() 函数</h4><p>切片是可索引的，并且可以由 len() 方法获取长度。</p>
+<p>切片提供了计算容量的方法 cap() 可以测量切片最长可以达到多少。</p>
+<h4 id="切片截取"><a href="#切片截取" class="headerlink" title="切片截取"></a>切片截取</h4><p>可以通过设置下限及上限来设置截取切片</p>
+<h4 id="append-和-copy-函数"><a href="#append-和-copy-函数" class="headerlink" title="append() 和 copy() 函数"></a>append() 和 copy() 函数</h4><p>如果想增加切片的容量，我们必须创建一个新的更大的切片并把原分片的内容都拷贝过来。</p>
+<p>使用append()函数则可以向切片中增加新的元素，而copy()可以获得一段切片的片段到新的切片。</p>
+<h4 id="切片示例代码："><a href="#切片示例代码：" class="headerlink" title="切片示例代码："></a>切片示例代码：</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	a:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">5</span>,<span class="number">5</span>)</span><br><span class="line">	a=[]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;</span><br><span class="line">	b:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">5</span>,<span class="number">5</span>)</span><br><span class="line">	<span class="built_in">copy</span>(b,a)</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(a))</span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(a))</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">	fmt.Println(b)</span><br><span class="line">	a=<span class="built_in">append</span>(a,<span class="number">6</span>)</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(a))</span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(a))</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">	a1:=a[<span class="number">0</span>:<span class="number">6</span>]</span><br><span class="line">	fmt.Println(a1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="运行结果-14"><a href="#运行结果-14" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-25/75161598.jpg" alt=""></p>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>哈希表是一种巧妙并且实用的数据结构。它是一个无序的key/value对的集合，其中所有的key都是不同的，然后通过给定的key可以在常数时间复杂度内检索、更新或删除对应的value。</p>
+<p>在Go语言中，一个map就是一个哈希表的引用，map类型可以写为map[K]V，其中K和V分别对应key和value。map中所有的key都有相同的类型，所有的value也有着相同的类型，但是key和value之间可以是不同的数据类型。其中K对应的key必须是支持==比较运算符的数据类型，所以map可以通过测试key是否相等来判断是否已经存在。虽然浮点数类型也是支持相等运算符比较的，但是不建议用浮点数做key，最坏的情况是可能出现的NaN和任何浮点数都不相等。对于V对应的value数据类型则没有任何的限制。</p>
+<h4 id="map的创建"><a href="#map的创建" class="headerlink" title="map的创建"></a>map的创建</h4><blockquote>
+<p>a:= make(map[string]int) // mapping from strings to ints</p>
+</blockquote>
+<p>也可以用map字面值的语法创建map，同时还可以指定一些最初的key/value：</p>
+<blockquote>
+<p>ages := map[string]int{</p>
+</blockquote>
+<blockquote>
+<p>   “china”: 1,</p>
+</blockquote>
+<blockquote>
+<p>  “us”: 2,</p>
+</blockquote>
+<blockquote>
+<p>}</p>
+</blockquote>
+<h4 id="map的访问"><a href="#map的访问" class="headerlink" title="map的访问"></a>map的访问</h4><p>Map中的元素通过key对应的下标语法访问：</p>
+<blockquote>
+<p>a[“china”] = 1</p>
+</blockquote>
+<blockquote>
+<p>fmt.Println(a[“china”]) // “1”</p>
+</blockquote>
+<h4 id="map元素的删除"><a href="#map元素的删除" class="headerlink" title="map元素的删除"></a>map元素的删除</h4><p>使用内置的delete函数可以删除元素：</p>
+<blockquote>
+<p>delete(a, “china”) // remove element a[“china”]</p>
+</blockquote>
+<p>所有这些操作是安全的，即使这些元素不在map中也没有关系；如果一个查找失败将返回value类型对应的零值。</p>
+<p>map中的元素并不是一个变量，因此我们不能对map的元素进行取址操作.</p>
+<p>要想遍历map中全部的key/value对的话，可以使用range风格的for循环实现。</p>
+<p>代码示例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	a:=<span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line">	a[<span class="string">"china"</span>]=<span class="number">1</span></span><br><span class="line">	a[<span class="string">"us"</span>]=<span class="number">2</span></span><br><span class="line">	fmt.Println(a[<span class="string">"us"</span>])</span><br><span class="line">	<span class="built_in">delete</span>(a,<span class="string">"us"</span>)</span><br><span class="line">	a[<span class="string">"jp"</span>]=<span class="number">3</span></span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> a &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%v is no.%v\n"</span>, k, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-15"><a href="#运行结果-15" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-25/32563292.jpg" alt=""></p>
+<h3 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h3><h4 id="Go语言面向对象过程的实现"><a href="#Go语言面向对象过程的实现" class="headerlink" title="Go语言面向对象过程的实现"></a>Go语言面向对象过程的实现</h4><p>面向对象主要包括了三个基本特征：封装、继承和多态。<br>封装，就是指运行的数据和函数绑定在一起，C++中主要是通过this指针来完成的。</p>
+<p>继承，就是指class之间可以相互继承属性和函数。</p>
+<p>多态，主要就是用统一的接口来处理通用的逻辑，每个class只需要按照接口实现自己的回调函数就可以了。</p>
+<p>Go语言中并没有像C++，Java语言中这类的Class，它只含有像C语言中的结构体，用结构体和指针等特性，完成一个类的作用，很巧妙的使用了指针和结构体，不仅是go的面向对象，包括go语言中的map等操作都是借助了结构体。</p>
+<p>C++、Java等面向对象的语言中，类的底层实现就是结构体，对象的引用就是指针，只是语言把他们封装起来了而已。</p>
+<h4 id="结构体的建立和实例的创建"><a href="#结构体的建立和实例的创建" class="headerlink" title="结构体的建立和实例的创建"></a>结构体的建立和实例的创建</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> circle <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line"> 	r <span class="keyword">float64</span></span><br><span class="line">	h <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如此，定义了一个圆柱体结构体，分别有半径和高两个属性。<br>可由以下几种方法来创建实例。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">circle1:=<span class="built_in">new</span>(circle)</span><br><span class="line">circle1:=&amp;circle&#123;&#125;</span><br><span class="line">circle1:=&amp;circle&#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line">circle1:=&amp;circle&#123;r:<span class="number">3</span>,h:<span class="number">4</span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>在函数声明时，在其名字之前放上一个变量，即是一个方法。这个附加的参数会将该函数附加到这种类型上，即相当于为这种类型定义了一个独占的方法。</p>
+<p>例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">S</span><span class="params">(p circle)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	pi:=<span class="number">3.1415926</span></span><br><span class="line">	<span class="keyword">return</span> pi*p.r*p.r*p.h</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码里那个附加的参数p，叫做方法的接收器(receiver)，早期的面向对象语言留下的遗产将调用一个方法称为“向一个对象发送消息”。</p>
+<p>在Go语言中，我们并不会像其它语言那样用this或者self作为接收器；我们可以任意的选择接收器的名字。由于接收器的名字经常会被使用到，所以保持其在方法间传递时的一致性和简短性是不错的主意。这里的建议是可以使用其类型的第一个字母，比如这里使用了Point的首字母p。</p>
+<p>在方法调用过程中，接收器参数一般会在方法名之前出现。这和方法声明是一样的，都是接收器参数在方法名字之前。</p>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>继承：</p>
+<p>当一个类型B的某个字段(匿名字段)的类型是另一个类型 A的时候，那么类型 A所拥有的全部字段都被隐式地引入了当前定义的这个类型B。这样就实现了继承。B类型的变量就可以调用A的所有属性和方法。也就是说A继承了B。</p>
+<p>则可得到继承circle的类mass，多了一个属性密度D。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> mass <span class="keyword">struct</span> &#123;</span><br><span class="line">	circle</span><br><span class="line">	D <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>则mass继承了circle的全部属性和方法。</p>
+<h4 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h4><p>如果一个类型B实现了作为其属性的类型A中的方法。那么这个类型B的值调用方法的时候调用的是自己类型B的方法，而不是属性类型A的方法。</p>
+<p>不同的类型可以有相同的方法名，因此需要在定义的时候消除歧义。</p>
+<h4 id="基于只针对象的方法"><a href="#基于只针对象的方法" class="headerlink" title="基于只针对象的方法"></a>基于只针对象的方法</h4><p>当调用一个函数时，会对其每一个参数值进行拷贝，如果一个函数需要更新一个变量，或者函数的其中一个参数实在太大我们希望能够避免进行这种默认的拷贝，这种情况下我们就需要用到指针了。对应到我们这里用来更新接收器的对象的方法，当这个接受者变量本身比较大时，我们就可以用其指针而不是对象来声明方法。</p>
+<p>例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SS</span><span class="params">(p *circle)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	pi:=<span class="number">3.1415926</span></span><br><span class="line">	<span class="keyword">return</span> pi*p.r*p.r*p.h</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上所有知识点综合后得到的程序：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> circle <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line"> 	r <span class="keyword">float64</span></span><br><span class="line">	h <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mass <span class="keyword">struct</span> &#123;</span><br><span class="line">	circle</span><br><span class="line">	D <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">S</span><span class="params">(p circle)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	pi:=<span class="number">3.1415926</span></span><br><span class="line">	<span class="keyword">return</span> pi*p.r*p.r*p.h</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">M</span><span class="params">(p mass)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	pi:=<span class="number">3.1415926</span></span><br><span class="line">	<span class="keyword">return</span> p.h*p.r*p.r*pi*p.D</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SS</span><span class="params">(p *circle)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	pi:=<span class="number">3.1415926</span></span><br><span class="line">	<span class="keyword">return</span> pi*p.r*p.r*p.h</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	circle1:=circle&#123;<span class="number">2.4</span>,<span class="number">3.1</span>&#125;</span><br><span class="line">	fmt.Println(circle1)</span><br><span class="line">	mass1:=mass&#123;circle&#123;<span class="number">2.4</span> ,<span class="number">3.1</span>&#125;,<span class="number">3.23</span>&#125;</span><br><span class="line">	fmt.Println(mass1)</span><br><span class="line">	fmt.Println(S(circle1))</span><br><span class="line">	fmt.Println(M(mass1))</span><br><span class="line">	fmt.Println(SS(&amp;circle1))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-16"><a href="#运行结果-16" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/27428608.jpg" alt=""></p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>Go 语言提供了另外一种数据类型即接口，它把所有的具有共性的方法定义在一起，任何其他类型只要实现了这些方法就是实现了这个接口。</p>
+<p>接口类型是对其它类型行为的抽象和概括；因为接口类型不会和特定的实现细节绑定在一起，通过这种抽象的方式我们可以让我们的函数更加灵活和更具有适应能力。</p>
+<p>原则：谁使用，谁实现</p>
+<p>形式：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 定义接口 */</span></span><br><span class="line"><span class="keyword">type</span> interface_name <span class="keyword">interface</span> &#123;</span><br><span class="line">   method_name1 [return_type]</span><br><span class="line">   method_name2 [return_type]</span><br><span class="line">   method_name3 [return_type]</span><br><span class="line">   ...</span><br><span class="line">   method_namen [return_type]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 定义结构体 */</span></span><br><span class="line"><span class="keyword">type</span> struct_name <span class="keyword">struct</span> &#123;</span><br><span class="line">   <span class="comment">/* variables */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 实现接口方法 */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(struct_name_variable struct_name)</span> <span class="title">method_name1</span><span class="params">()</span> [<span class="title">return_type</span>]</span> &#123;</span><br><span class="line">   <span class="comment">/* 方法实现 */</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(struct_name_variable struct_name)</span> <span class="title">method_namen</span><span class="params">()</span> [<span class="title">return_type</span>]</span> &#123;</span><br><span class="line">   <span class="comment">/* 方法实现*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码示例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Phone <span class="keyword">interface</span> &#123;</span><br><span class="line">    call()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NokiaPhone <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(nokiaPhone NokiaPhone)</span> <span class="title">call</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"I am Nokia, I can call you!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IPhone <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(iPhone IPhone)</span> <span class="title">call</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"I am iPhone, I can call you!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> phone Phone</span><br><span class="line"></span><br><span class="line">    phone = <span class="built_in">new</span>(NokiaPhone)</span><br><span class="line">    phone.call()</span><br><span class="line"></span><br><span class="line">    phone = <span class="built_in">new</span>(IPhone)</span><br><span class="line">    phone.call()</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-17"><a href="#运行结果-17" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/97316280.jpg" alt=""></p>
+<h2 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h2><h3 id="Goruntimes"><a href="#Goruntimes" class="headerlink" title="Goruntimes"></a>Goruntimes</h3><p>go中没有多进程多线程的概念，而是使用goroutine概念，我们可以把goroutine当作其他语言中的线程，当在一个函数前加入go关键字，就启动了一个goroutine。</p>
+<p>与操作系统或者其它语言提供的线程相比较，可以简单地把goroutine类比作一个线程。</p>
+<p>当一个程序启动时，其主函数即在一个单独的goroutine中运行，我们叫它main goroutine。新的goroutine会用go语句来创建。在语法上，go语句是一个普通的函数或方法调用前加上关键字go。go语句会使其语句中的函数在一个新创建的goroutine中运行。而go语句本身会迅速地完成。</p>
+<p>下面的这个例子说明了如何让主程序在运行斐波那契数列的同时，并发运行一个等待动画：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">go</span> spinner(<span class="number">100</span> * time.Millisecond)</span><br><span class="line">	<span class="keyword">const</span> n = <span class="number">45</span></span><br><span class="line">	fibN := fib(n) <span class="comment">// slow</span></span><br><span class="line">	fmt.Printf(<span class="string">"\rFibonacci(%d) = %d\n"</span>, n, fibN)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">spinner</span><span class="params">(delay time.Duration)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> _, r := <span class="keyword">range</span> <span class="string">`-\|/`</span> &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"\r%c"</span>, r)</span><br><span class="line">			time.Sleep(delay)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fib</span><span class="params">(x <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> x &lt; <span class="number">2</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> x</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> fib(x<span class="number">-1</span>) + fib(x<span class="number">-2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-18"><a href="#运行结果-18" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/50564423.jpg" alt=""></p>
+<p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/50564423.jpg" alt=""></p>
+<p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/79998804.jpg" alt=""></p>
+<p>后主函数返回。主函数返回时，所有的goroutine都会被直接打断，程序退出。除了从主函数退出或者直接终止程序之外，没有其它的编程方法能够让一个goroutine来打断另一个的执行。</p>
+<p>或者，过goroutine之间的通信来让一个goroutine请求其它的goroutine，并被请求的goroutine自行结束执行。</p>
+<h3 id="Channels"><a href="#Channels" class="headerlink" title="Channels"></a>Channels</h3><p>如果说goroutine是Go语音程序的并发体的话，那么channels它们之间的通信机制。一个channels是一个通信机制，它可以让一个goroutine通过它给另一个goroutine发送值信息。每个channel都有一个特殊的类型，也就是channels可发送数据的类型。一个可以发送int类型数据的channel一般写为chan int。<br>创建：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>) <span class="comment">// ch has type 'chan int'</span></span><br></pre></td></tr></table></figure></p>
+<p>一个channel有发送和接受两个主要操作，都是通信行为。一个发送语句将一个值从一个goroutine通过channel发送到另一个执行接收操作的goroutine。发送和接收两个操作都是用&lt;-运算符。在发送语句中，&lt;-运算符分割channel和要发送的值。在接收语句中，&lt;-运算符写在channel对象之前。一个不使用接收结果的接收操作也是合法的。</p>
+<p>Channel还支持close操作，用于关闭channel，随后对基于该channel的任何发送操作都将导致panic异常。对一个已经被close过的channel之行接收操作依然可以接受到之前已经成功发送的数据；如果channel中已经没有数据的话讲产生一个零值的数据。</p>
+<blockquote>
+<p>close(ch)</p>
+</blockquote>
+<h3 id="不带缓存的Channel"><a href="#不带缓存的Channel" class="headerlink" title="不带缓存的Channel"></a>不带缓存的Channel</h3><p>一个基于无缓存Channels的发送操作将导致发送者goroutine阻塞，直到另一个goroutine在相同的Channels上执行接收操作，当发送的值通过Channels成功传输之后，两个goroutine可以继续执行后面的语句。反之，如果接收操作先发生，那么接收者goroutine也将阻塞，直到有另一个goroutine在相同的Channels上执行发送操作。</p>
+<p>基于无缓存Channels的发送和接收操作将导致两个goroutine做一次同步操作。因为这个原因，无缓存Channels有时候也被称为同步Channels。当通过一个无缓存Channels发送数据时，接收者收到数据发生在唤醒发送者goroutine之前。</p>
+<h3 id="Channel串联"><a href="#Channel串联" class="headerlink" title="Channel串联"></a>Channel串联</h3><p>Channels也可以用于将多个goroutine链接在一起，一个Channels的输出作为下一个Channels的输入。这种串联的Channels就是所谓的管道（pipeline）。</p>
+<p>程序示例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	naturals := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">	squares := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Counter</span></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">for</span> x := <span class="number">0</span>; ; x++ &#123;</span><br><span class="line">			naturals &lt;- x</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Squarer</span></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			x := &lt;-naturals</span><br><span class="line">			squares &lt;- x * x</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Printer (in main goroutine)</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		fmt.Println(&lt;-squares)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-19"><a href="#运行结果-19" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/39565201.jpg" alt=""></p>
+<h3 id="带缓存的channel"><a href="#带缓存的channel" class="headerlink" title="带缓存的channel"></a>带缓存的channel</h3><p>带缓存的Channel内部持有一个元素队列。队列的最大容量是在调用make函数创建channel时通过第二个参数指定的。</p>
+<p>向缓存Channel的发送操作就是向内部缓存队列的尾部插入元素，接收操作则是从队列的头部删除元素。如果内部缓存队列是满的，那么发送操作将阻塞直到因另一个goroutine执行接收操作而释放了新的队列空间。相反，如果channel是空的，接收操作将阻塞直到有另一个goroutine执行发送操作而向队列插入元素。</p>
+<p>cap()函数可以获得缓存空间大大小</p>
+<p>len()函数可以获得缓存元素的个数</p>
+<p>示例程序：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	responses := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">9</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;responses&lt;-jisuan(<span class="number">3</span>)&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;responses&lt;-jisuan(<span class="number">4</span>)&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;responses&lt;-jisuan(<span class="number">5</span>)&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;responses&lt;-jisuan(<span class="number">6</span>)&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;responses&lt;-jisuan(<span class="number">7</span>)&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;responses&lt;-jisuan(<span class="number">8</span>)&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;responses&lt;-jisuan(<span class="number">9</span>)&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;responses&lt;-jisuan(<span class="number">10</span>)&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;responses&lt;-jisuan(<span class="number">11</span>)&#125;()</span><br><span class="line">	a:=&lt;-responses</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">jisuan</span><span class="params">(a <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	s:=a*a</span><br><span class="line">	<span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-20"><a href="#运行结果-20" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/21588824.jpg" alt=""></p>
+<p>实验：并发计算pi<br>代码：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> n <span class="keyword">int</span></span><br><span class="line">	fmt.Println(<span class="string">"请输入n值"</span>)</span><br><span class="line">	fmt.Scanln(&amp;n)</span><br><span class="line">	fmt.Println(pi(n))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">pi</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	ch:=<span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">float64</span>,<span class="number">100</span>)</span><br><span class="line">	<span class="keyword">for</span> k:=<span class="number">0</span>; k&lt;=n; k++ &#123;</span><br><span class="line">		<span class="keyword">go</span> term(ch,<span class="keyword">float64</span>(k))</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> f <span class="keyword">float64</span>=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> k:=<span class="number">0</span>;k&lt;=n;k++ &#123;</span><br><span class="line">		f+=&lt;-ch</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> f</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">term</span><span class="params">(ch <span class="keyword">chan</span> <span class="keyword">float64</span>, k <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	ch&lt;<span class="number">-4</span>*math.Pow(<span class="number">-1</span>, k) / (<span class="number">2</span>*k+<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果：-1"><a href="#运行结果：-1" class="headerlink" title="运行结果："></a>运行结果：</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/73739209.jpg" alt=""></p>
+<h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><h3 id="TCP编程"><a href="#TCP编程" class="headerlink" title="TCP编程"></a>TCP编程</h3><p>输控制协议（英语：Transmission Control Protocol，缩写为 TCP）是一种面向连接的、可靠的、基于字节流的传输层通信协议，由IETF的RFC 793定义。在简化的计算机网络OSI模型中，它完成第四层传输层所指定的功能，用户数据报协议（UDP）是同一层内另一个重要的传输协议。</p>
+<p>在因特网协议族（Internet protocol suite）中，TCP层是位于IP层之上，应用层之下的中间层。不同主机的应用层之间经常需要可靠的、像管道一样的连接，但是IP层不提供这样的流机制，而是提供不可靠的包交换。</p>
+<p>应用层向TCP层发送用于网间传输的、用8位字节表示的数据流，然后TCP把数据流分割成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（MTU）的限制）。之后TCP把结果包传给IP层，由它来通过网络将包传送给接收端实体的TCP层。TCP为了保证不发生丢包，就给每个包一个序号，同时序号也保证了传送到接收端实体的包的按序接收。然后接收端实体对已成功收到的包发回一个相应的确认（ACK）；如果发送端实体在合理的往返时延（RTT）内未收到确认，那么对应的数据包就被假设为已丢失将会被进行重传。TCP用一个校验和函数来检验数据是否有错误；在发送和接收时都要计算校验和。</p>
+<h4 id="返回本机-目标主机的网络地址"><a href="#返回本机-目标主机的网络地址" class="headerlink" title="返回本机\目标主机的网络地址"></a>返回本机\目标主机的网络地址</h4><p>本机地址：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	address,error:=net.InterfaceAddrs()</span><br><span class="line">	<span class="keyword">if</span> error!=<span class="literal">nil</span>&#123;</span><br><span class="line">		fmt.Printf(<span class="string">"出现错误，错误信息为%v"</span>,error)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"本机地址为：%v"</span>,address)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-21"><a href="#运行结果-21" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/76358011.jpg" alt=""></p>
+<p>目标主机地址：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	address, error := net.LookupIP(<span class="string">"www.google.com"</span>)</span><br><span class="line">	<span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"出现错误，错误信息为%v"</span>, error)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"目标主机地址为：%v"</span>, address)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-22"><a href="#运行结果-22" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/11558708.jpg" alt=""></p>
+<h4 id="解析带端口号地址的ip"><a href="#解析带端口号地址的ip" class="headerlink" title="解析带端口号地址的ip"></a>解析带端口号地址的ip</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ip, error := net.ResolveTCPAddr(<span class="string">"tcp"</span>,<span class="string">"www.google.com:80"</span>)</span><br><span class="line">	<span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"出现错误，错误信息为%v"</span>, error)</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"目标TCP地址为：%v"</span>, ip)</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="运行结果-23"><a href="#运行结果-23" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/2670722.jpg" alt=""></p>
+<h3 id="UDP编程"><a href="#UDP编程" class="headerlink" title="UDP编程"></a>UDP编程</h3><h4 id="什么是UDP编程"><a href="#什么是UDP编程" class="headerlink" title="什么是UDP编程"></a>什么是UDP编程</h4><ul>
+<li>使用UDP协议(User Datagram Protocol)来传输数据的编程。</li>
+<li><p>UDP协议→是面向无连接的、不可靠的数据报投递服务。</p>
+</li>
+<li><p>当使用UDP 协议传输信息流时，用户应用程序必须负责解决数据报丢失、重复、排序，差错确认等问题。</p>
+</li>
+<li><p>资源消耗小处理速度快，通常音频、视频和普通数据在传送时使UDP较多。如QQ使用的就是UDP协议。</p>
+</li>
+<li><p>UDP适用于一次只传少量数据的环境。</p>
+</li>
+<li><p>从理论上说，包含报头在内的数据报的最大长度为65535字<br>节。不过，一些实际应用往往会限制数据报的大小，有时会降低到8192字节。</p>
+</li>
+</ul>
+<h4 id="net包常用的UDP库函数"><a href="#net包常用的UDP库函数" class="headerlink" title="net包常用的UDP库函数"></a>net包常用的UDP库函数</h4><ul>
+<li>func ResolveUDPAddr(net, addr string) (*UDPAddr, error)</li>
+<li>把addr 地址字符串，解析成UDPAddr 地址。</li>
+<li>net 可以是”udp”,”udp4”,”udp6”</li>
+<li>addr 是一个地址字符串，由主机名或IP 地址，以及“:”后面跟着的端口号组成。如果是IPv6，主机部分必须在方括内，如[::1]8080</li>
+</ul>
+<hr>
+<ul>
+<li>func ListenUDP(net string, laddr <em>UDPAddr) (</em>UDPConn, error)</li>
+<li>在指定的地址(laddr)监听，等待UDP 数据包的到达。</li>
+<li>返回*UDPConn，可以使用连接的ReadFrom函数来读取UDP 数据，用WriteTo 来向客户端发送数据。</li>
+<li>func (c *UDPConn) ReadFrom(b []byte) (int, Addr, error)</li>
+<li>服务端用来读取UDP 数据。Addr 是发送方的地址。</li>
+</ul>
+<p>服务端代码：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span></span><br><span class="line">(</span><br><span class="line"><span class="string">"fmt"</span></span><br><span class="line"><span class="string">"net"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HandleCilent</span><span class="params">(conn *net.UDPConn,data []<span class="keyword">byte</span>,address *net.UDPAddr)</span></span>  &#123;</span><br><span class="line">	fmt.Println(<span class="string">"收到数据："</span>+<span class="keyword">string</span>(data))</span><br><span class="line">	conn.WriteToUDP([]<span class="keyword">byte</span>(<span class="string">"数据已收到"</span>),address)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//解析UDP地址</span></span><br><span class="line">	address, error := net.ResolveUDPAddr(<span class="string">"udp"</span>, <span class="string">":7070"</span>)</span><br><span class="line">	<span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"出现错误，错误信息为%v"</span>, error)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//7070端口监听</span></span><br><span class="line">	conn, error := net.ListenUDP(<span class="string">"udp"</span>, address)</span><br><span class="line">	<span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"出现错误，错误信息为%v"</span>, error)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>&#123;<span class="comment">//循环接收数据，处理数据</span></span><br><span class="line">		<span class="keyword">var</span> buf [<span class="number">1024</span>]<span class="keyword">byte</span></span><br><span class="line">		n,address,error:=conn.ReadFromUDP(buf[<span class="number">0</span>:])</span><br><span class="line">		<span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"出现错误，错误信息为%v"</span>, error)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">			<span class="comment">//开启新线程处理客户端数据</span></span><br><span class="line">			<span class="keyword">go</span> HandleCilent(conn,buf[<span class="number">0</span>:n],address)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>客户端代码：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="comment">//解析服务器UDP地址</span></span><br><span class="line">	address, error := net.ResolveUDPAddr(<span class="string">"udp"</span>, <span class="string">"127.0.0.1:7070"</span>)</span><br><span class="line">	<span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"出现错误，错误信息为%v"</span>, error)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//连接服务器</span></span><br><span class="line">	conn,error:=net.DialUDP(<span class="string">"udp"</span>,<span class="literal">nil</span>,address)</span><br><span class="line">	<span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"出现错误，错误信息为%v"</span>, error)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> conn.Close()<span class="comment">//关闭连接</span></span><br><span class="line">	<span class="comment">//向服务器发送数据</span></span><br><span class="line">	conn.Write([]<span class="keyword">byte</span>(<span class="string">"Hello,Server"</span>))</span><br><span class="line">	<span class="keyword">var</span> buf [<span class="number">1024</span>]<span class="keyword">byte</span></span><br><span class="line">	<span class="comment">//读取服务器相应信息</span></span><br><span class="line">	n,_,error:=conn.ReadFromUDP(buf[<span class="number">0</span>:])</span><br><span class="line">	<span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"出现错误，错误信息为%v"</span>, error)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(buf[<span class="number">0</span>:n]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="Go语言范围-Range"><a href="#Go语言范围-Range" class="headerlink" title="Go语言范围(Range)"></a>Go语言范围(Range)</h3><p>Go 语言中 range 关键字用于for循环中迭代数组(array)、切片(slice)、通道(channel)或集合(map)的元素。在数组和切片中它返回元素的索引值，在集合中返回 key-value 对的 key 值。<br>示例代码：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//这是我们使用range去求一个slice的和。使用数组跟这个很类似</span></span><br><span class="line">	nums := []<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">	sum := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> _, num := <span class="keyword">range</span> nums &#123;</span><br><span class="line">		sum += num</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"sum:"</span>, sum)</span><br><span class="line">	<span class="comment">//在数组上使用range将传入index和值两个变量。上面那个例子我们不需要使用该元素的序号，所以我们使用空白符"_"省略了。有时侯我们确实需要知道它的索引。</span></span><br><span class="line">	<span class="keyword">for</span> i, num := <span class="keyword">range</span> nums &#123;</span><br><span class="line">		<span class="keyword">if</span> num == <span class="number">3</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"index:"</span>, i)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//range也可以用在map的键值对上。</span></span><br><span class="line">	kvs := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;<span class="string">"a"</span>: <span class="string">"apple"</span>, <span class="string">"b"</span>: <span class="string">"banana"</span>&#125;</span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> kvs &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%s -&gt; %s\n"</span>, k, v)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//range也可以用来枚举Unicode字符串。第一个参数是字符的索引，第二个是字符（Unicode的值）本身。</span></span><br><span class="line">	<span class="keyword">for</span> i, c := <span class="keyword">range</span> <span class="string">"go"</span> &#123;</span><br><span class="line">		fmt.Println(i, c)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-24"><a href="#运行结果-24" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/32293184.jpg" alt=""></p>
+<h3 id="Go嵌入C语言代码"><a href="#Go嵌入C语言代码" class="headerlink" title="Go嵌入C语言代码"></a>Go嵌入C语言代码</h3><p>想在Go代码中使用C语言必须在代码开头注释中写，然后再紧接着的下一行写import “C”，这样就算是导入完成了。这个”C”不是一个真正的包，而是一个类似于命名空间的东西，所有能调用的C的变量、函数都包含在里面。</p>
+<p>代码示例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="comment">void say_hello() &#123;</span></span><br><span class="line"><span class="comment">        printf("Hello World!\n");</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"C"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	C.say_hello()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行结果-25"><a href="#运行结果-25" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/40659156.jpg" alt=""></p>
+<h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><p>在计算机科学领域，反射是指一类应用，它们能够自描述和自控制。也就是说，这类应用通过采用某种机制来实现对自己行为的描述（self-representation）和监测（examination），并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。</p>
+<h3 id="unsafe"><a href="#unsafe" class="headerlink" title="unsafe"></a>unsafe</h3><p>Golang的unsafe包是一个很特殊的包。 为什么这样说呢？ 本文将详细解释。</p>
+<p>来自go语言官方文档的警告</p>
+<p>unsafe包的文档是这么说的：</p>
+<blockquote>
+<p>导入unsafe的软件包可能不可移植，并且不受Go 1兼容性指南的保护。</p>
+</blockquote>
+<p>Go 1 兼容性指南这么说：</p>
+<blockquote>
+<p>导入unsafe软件包可能取决于Go实现的内部属性。 我们保留对可能导致程序崩溃的实现进行更改的权利。</p>
+</blockquote>
+<p>当然包名称暗示unsafe包是不安全的。 但这个包有多危险呢？ 让我们先看看unsafe包的作用。</p>
+<p>Unsafe包的作用:</p>
+<p>unsafe包含以下资源：</p>
+<p>三个函数：</p>
+<p>func Alignof（variable ArbitraryType）uintptr</p>
+<p>func Offsetof（selector ArbitraryType）uintptr</p>
+<p>func Sizeof（variable ArbitraryType）uintptr</p>
+<p>和一种类型：</p>
+<p>类型Pointer * ArbitraryType</p>
+<p>这里，ArbitraryType不是一个真正的类型，它只是一个占位符。</p>
+<p>与Golang中的大多数函数不同，上述三个函数的调用将始终在编译时求值，而不是运行时。 这意味着它们的返回结果可以分配给常量。</p>
+<p>unsafe包中的函数中非唯一调用将在编译时求值。当传递给len和cap的参数是一个数组值时，内置函数和cap函数的调用也可以在编译时被求值。</p>
+<p>除了这三个函数和一个类型外，指针在unsafe包也为编译器服务。</p>
+<p>出于安全原因，Golang不允许以下之间的直接转换：</p>
+<p>两个不同指针类型的值，例如 int64和 float64。</p>
+<p>指针类型和uintptr的值。</p>
+<p>但是借助unsafe.Pointer，我们可以打破Go类型和内存安全性，并使上面的转换成为可能。这怎么可能发生？让我们阅读unsafe包文档中列出的规则：</p>
+<p>任何类型的指针值都可以转换为unsafe.Pointer。</p>
+<p>unsafe.Pointer可以转换为任何类型的指针值。</p>
+<p>uintptr可以转换为unsafe.Pointer。</p>
+<p>unsafe.Pointer可以转换为uintptr。</p>
+<p>这些规则与Go规范一致：</p>
+<p>底层类型uintptr的任何指针或值都可以转换为指针类型，反之亦然。</p>
+<p>规则表明unsafe.Pointer类似于c语言中的void 。当然，void 在C语言里是危险的！</p>
+<p>在上述规则下，对于两种不同类型T1和T2，可以使 T1值与unsafe.Pointer值一致，然后将unsafe.Pointer值转换为 T2值（或uintptr值）。通过这种方式可以绕过Go类型系统和内存安全性。当然，滥用这种方式是很危险的。</p>
+<p>示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"unsafe"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> n <span class="keyword">int64</span> = <span class="number">5</span></span><br><span class="line">    <span class="keyword">var</span> pn = &amp;n</span><br><span class="line">    <span class="keyword">var</span> pf = (*<span class="keyword">float64</span>)(unsafe.Pointer(pn))</span><br><span class="line">    <span class="comment">// now, pn and pf are pointing at the same memory address</span></span><br><span class="line">    fmt.Println(*pf) <span class="comment">// 2.5e-323</span></span><br><span class="line">    *pf = <span class="number">3.14159</span></span><br><span class="line">    fmt.Println(n) <span class="comment">// 4614256650576692846</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="运行结果-26"><a href="#运行结果-26" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="http://omt37wai0.bkt.clouddn.com/17-7-26/66703020.jpg" alt=""></p>
+<p>在这个例子中的转换可能是无意义的，但它是安全和合法的</p>
+<p>因此，资源在unsafe包中的作用是为Go编译器服务，unsafe.Pointer类型的作用是绕过Go类型系统和内存安全。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/10/to the moon comment/" rel="next" title="《To The Moon》通关感言">
+                <i class="fa fa-chevron-left"></i> 《To The Moon》通关感言
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/21/chaoschild/" rel="prev" title="CHAOS；CHILD（伪）通关感言">
+                CHAOS；CHILD（伪）通关感言 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">KnightHart</p>
+              <p class="site-description motion-element" itemprop="description">一个简单的个人博客</p>
+          </div>
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言基础"><span class="nav-number">1.</span> <span class="nav-text">Go语言基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go语言简介"><span class="nav-number">1.1.</span> <span class="nav-text">Go语言简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件名、关键字与标识符"><span class="nav-number">1.2.</span> <span class="nav-text">文件名、关键字与标识符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件名"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关键字"><span class="nav-number">1.2.2.</span> <span class="nav-text">关键字</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预定义标识符"><span class="nav-number">1.3.</span> <span class="nav-text">预定义标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Helloworld"><span class="nav-number">1.4.</span> <span class="nav-text">Helloworld</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果"><span class="nav-number">1.4.1.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明"><span class="nav-number">1.5.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.6.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-1"><span class="nav-number">1.6.1.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简短变量声明"><span class="nav-number">1.6.2.</span> <span class="nav-text">简短变量声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-2"><span class="nav-number">1.6.3.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值"><span class="nav-number">1.7.</span> <span class="nav-text">赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-3"><span class="nav-number">1.7.1.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元祖赋值"><span class="nav-number">1.7.2.</span> <span class="nav-text">元祖赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-4"><span class="nav-number">1.7.3.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础数据类型"><span class="nav-number">1.8.</span> <span class="nav-text">基础数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整形"><span class="nav-number">1.8.1.</span> <span class="nav-text">整形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浮点数"><span class="nav-number">1.8.2.</span> <span class="nav-text">浮点数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-5"><span class="nav-number">1.8.3.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复数"><span class="nav-number">1.8.4.</span> <span class="nav-text">复数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔型"><span class="nav-number">1.8.5.</span> <span class="nav-text">布尔型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-6"><span class="nav-number">1.8.6.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串"><span class="nav-number">1.8.7.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-7"><span class="nav-number">1.8.8.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常量"><span class="nav-number">1.8.9.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-8"><span class="nav-number">1.8.10.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go语言循环"><span class="nav-number">1.9.</span> <span class="nav-text">Go语言循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-9"><span class="nav-number">1.9.1.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go语言条件语句"><span class="nav-number">1.10.</span> <span class="nav-text">Go语言条件语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if循环"><span class="nav-number">1.10.1.</span> <span class="nav-text">if循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-10"><span class="nav-number">1.10.2.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#switch语句"><span class="nav-number">1.10.3.</span> <span class="nav-text">switch语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-11"><span class="nav-number">1.10.4.</span> <span class="nav-text">运行结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数、切片、map"><span class="nav-number">2.</span> <span class="nav-text">函数、切片、map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">2.1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数声明"><span class="nav-number">2.1.1.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-12"><span class="nav-number">2.1.2.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多返回值"><span class="nav-number">2.1.3.</span> <span class="nav-text">多返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-13"><span class="nav-number">2.1.4.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数值"><span class="nav-number">2.1.5.</span> <span class="nav-text">函数值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果："><span class="nav-number">2.1.6.</span> <span class="nav-text">运行结果：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切片"><span class="nav-number">2.2.</span> <span class="nav-text">切片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#切片的定义和初始化"><span class="nav-number">2.2.1.</span> <span class="nav-text">切片的定义和初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#len-和-cap-函数"><span class="nav-number">2.2.2.</span> <span class="nav-text">len() 和 cap() 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切片截取"><span class="nav-number">2.2.3.</span> <span class="nav-text">切片截取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#append-和-copy-函数"><span class="nav-number">2.2.4.</span> <span class="nav-text">append() 和 copy() 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切片示例代码："><span class="nav-number">2.2.5.</span> <span class="nav-text">切片示例代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-14"><span class="nav-number">2.2.6.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map"><span class="nav-number">2.3.</span> <span class="nav-text">map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#map的创建"><span class="nav-number">2.3.1.</span> <span class="nav-text">map的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#map的访问"><span class="nav-number">2.3.2.</span> <span class="nav-text">map的访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#map元素的删除"><span class="nav-number">2.3.3.</span> <span class="nav-text">map元素的删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-15"><span class="nav-number">2.3.4.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象编程"><span class="nav-number">2.4.</span> <span class="nav-text">面向对象编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Go语言面向对象过程的实现"><span class="nav-number">2.4.1.</span> <span class="nav-text">Go语言面向对象过程的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结构体的建立和实例的创建"><span class="nav-number">2.4.2.</span> <span class="nav-text">结构体的建立和实例的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">2.4.3.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承"><span class="nav-number">2.4.4.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法的重写"><span class="nav-number">2.4.5.</span> <span class="nav-text">方法的重写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于只针对象的方法"><span class="nav-number">2.4.6.</span> <span class="nav-text">基于只针对象的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-16"><span class="nav-number">2.4.7.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口"><span class="nav-number">2.5.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-17"><span class="nav-number">2.5.1.</span> <span class="nav-text">运行结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程"><span class="nav-number">3.</span> <span class="nav-text">并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Goruntimes"><span class="nav-number">3.1.</span> <span class="nav-text">Goruntimes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-18"><span class="nav-number">3.1.1.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channels"><span class="nav-number">3.2.</span> <span class="nav-text">Channels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不带缓存的Channel"><span class="nav-number">3.3.</span> <span class="nav-text">不带缓存的Channel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel串联"><span class="nav-number">3.4.</span> <span class="nav-text">Channel串联</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-19"><span class="nav-number">3.4.1.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带缓存的channel"><span class="nav-number">3.5.</span> <span class="nav-text">带缓存的channel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-20"><span class="nav-number">3.5.1.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果：-1"><span class="nav-number">3.5.2.</span> <span class="nav-text">运行结果：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络编程"><span class="nav-number">4.</span> <span class="nav-text">网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP编程"><span class="nav-number">4.1.</span> <span class="nav-text">TCP编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#返回本机-目标主机的网络地址"><span class="nav-number">4.1.1.</span> <span class="nav-text">返回本机\目标主机的网络地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-21"><span class="nav-number">4.1.2.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-22"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析带端口号地址的ip"><span class="nav-number">4.1.4.</span> <span class="nav-text">解析带端口号地址的ip</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-23"><span class="nav-number">4.1.5.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP编程"><span class="nav-number">4.2.</span> <span class="nav-text">UDP编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是UDP编程"><span class="nav-number">4.2.1.</span> <span class="nav-text">什么是UDP编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#net包常用的UDP库函数"><span class="nav-number">4.2.2.</span> <span class="nav-text">net包常用的UDP库函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">5.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go语言范围-Range"><span class="nav-number">5.1.</span> <span class="nav-text">Go语言范围(Range)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-24"><span class="nav-number">5.1.1.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go嵌入C语言代码"><span class="nav-number">5.2.</span> <span class="nav-text">Go嵌入C语言代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-25"><span class="nav-number">5.2.1.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射"><span class="nav-number">5.3.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unsafe"><span class="nav-number">5.4.</span> <span class="nav-text">unsafe</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-26"><span class="nav-number">5.4.1.</span> <span class="nav-text">运行结果</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KnightHart</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://knighthartde-bu-luo-ge.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://knighthartx.github.io/2017/08/05/golearnnote/';
+        this.page.identifier = '2017/08/05/golearnnote/';
+        this.page.title = 'Go语言学习笔记';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://knighthartde-bu-luo-ge.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
